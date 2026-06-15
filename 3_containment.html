@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desk Page 3: Containment Protocols</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-base: #030712; --bg-surface: #0b1329; --accent: #10b981; --border: rgba(255,255,255,0.08); --text: #f3f4f6; }
+        body { background: var(--bg-base); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding: 40px; }
+        .page-container { max-width: 1100px; margin: 0 auto; }
+        .header-block { border-bottom: 2px solid var(--accent); padding-bottom: 20px; margin-bottom: 30px; }
+        .guild-box { background: rgba(16, 185, 129, 0.05); border-left: 4px solid var(--accent); padding: 20px; margin-bottom: 30px; border-radius: 8px; }
+        .step-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 30px; }
+        .step-item { background: var(--bg-surface); border: 1px solid var(--border); padding: 20px; border-radius: 8px; display: flex; gap: 20px; align-items: flex-start; }
+        .step-item.checked { border-left: 4px solid var(--accent); background: #071712; }
+        .step-item input[type="checkbox"] { transform: scale(1.4); margin-top: 4px; cursor: pointer; }
+        .step-text h4 { font-size: 1.05rem; color: #fff; margin-bottom: 4px; }
+        .step-text p { font-size: 0.88rem; color: #9ca3af; line-height: 1.5; }
+        .btn-next { background: var(--accent); color: #030712; font-weight: 700; padding: 14px 28px; border: none; border-radius: 6px; cursor: pointer; float: right; font-family: 'JetBrains Mono'; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header-block">
+            <h1>STAGE 03: Direct Desk Containment &amp; Critical Incident Isolation</h1>
+        </div>
+
+        <div class="guild-box">
+            <h3>🛑 Desk Guide: Active Countermeasures</h3>
+            <p style="margin-top: 8px; font-size: 0.92rem; color: #cbd5e1; line-height: 1.5;">
+                Do not just take notes—**act immediately** to secure the victim's digital footprint. Walk through these technical mitigation protocols step-by-step. Check off each box as you execute the countermeasure to compile a forensic record of your response.
+            </p>
+        </div>
+
+        <div class="step-list">
+            <div class="step-item" id="s1">
+                <input type="checkbox" id="cb1" onchange="toggleStep('s1', 'Comms Cut')">
+                <div class="step-text">
+                    <h4>1. Terminate Attacker Access Matrix</h4>
+                    <p>Instruct the citizen to immediately block the hostile numbers across all channels (GSM, WhatsApp, Telegram). Sever the threat actor's direct psychological line of communication.</p>
+                </div>
+            </div>
+            <div class="step-item" id="s2">
+                <input type="checkbox" id="cb2" onchange="toggleStep('s2', 'Telco Freeze')">
+                <div class="step-text">
+                    <h4>2. Infrastructure SIM Lock down &amp; IMEI Freeze</h4>
+                    <p>If a SIM foot-print hijack is detected, pick up the desk line and contact the mobile operator support group to freeze routing maps, invalidate current ICCIDs, and block downstream financial transfers.</p>
+                </div>
+            </div>
+            <div class="step-item" id="s3">
+                <input type="checkbox" id="cb3" onchange="toggleStep('s3', 'Session Revocation')">
+                <div class="step-text">
+                    <h4>3. Cloud Session Revocation &amp; MFA Reset</h4>
+                    <p>Force log out all active web applications linked to the phone line. Revoke Google OAuth tokens, change primary passwords, and set up secondary app-based authenticators rather than relying on SMS pins.</p>
+                </div>
+            </div>
+            <div class="step-item" id="s4">
+                <input type="checkbox" id="cb4" onchange="toggleStep('s4', 'Evidence Preserved')">
+                <div class="step-text">
+                    <h4>4. Package Forensic Artifacts (Section 106B Compliance)</h4>
+                    <p>Export unedited M-Pesa message confirmations, capture headers from phishing emails, log specific destination phone numbers, and take timestamped screenshots. This ensures your evidence stands up under Kenyan law.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-next" onclick="saveAndNavigate()">Proceed to Outreach Matrix ➔</button>
+    </div>
+
+    <script>
+        let completedMitigations = [];
+        function toggleStep(id, actionToken) {
+            const cb = document.getElementById('cb' + id.substring(1));
+            const row = document.getElementById(id);
+            if(cb.checked) {
+                row.classList.add('checked');
+                if(!completedMitigations.includes(actionToken)) completedMitigations.push(actionToken);
+            } else {
+                row.classList.remove('checked');
+                completedMitigations = completedMitigations.filter(i => i !== actionToken);
+            }
+        }
+        function saveAndNavigate() {
+            sessionStorage.setItem('mitigations', JSON.stringify(completedMitigations));
+            window.location.href = '4_outreach.html';
+        }
+    </script>
+</body>
+</html>
