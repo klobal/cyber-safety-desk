@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desk Page 2: Deep Threat Matrix</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-base: #030712; --bg-surface: #0b1329; --accent: #3b82f6; --border: rgba(255,255,255,0.08); --text: #f3f4f6; }
+        body { background: var(--bg-base); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; padding: 40px; }
+        .page-container { max-width: 1200px; margin: 0 auto; }
+        .header-block { border-bottom: 2px solid var(--accent); padding-bottom: 20px; margin-bottom: 30px; }
+        .guild-box { background: rgba(59, 130, 246, 0.05); border-left: 4px solid var(--accent); padding: 20px; margin-bottom: 30px; border-radius: 8px; }
+        .matrix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px; }
+        .vector-card { background: var(--bg-surface); border: 1px solid var(--border); padding: 24px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .vector-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .vector-card.active { border-color: #10b981; background: linear-gradient(to bottom right, #0b1329, #061e14); }
+        .vector-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: #fff; }
+        .vector-card p { font-size: 0.8rem; color: #9ca3af; line-height: 1.4; }
+        .analysis-box { background: #070d1a; border: 1px solid var(--border); padding: 24px; border-radius: 8px; margin-bottom: 24px; }
+        .risk-badge { display: inline-block; padding: 6px 12px; font-family: 'JetBrains Mono'; font-weight: 700; border-radius: 4px; font-size: 0.8rem; text-transform: uppercase; }
+        .risk-CRITICAL { background: #7f1d1d; color: #fecaca; }
+        .risk-HIGH { background: #78350f; color: #fef3c7; }
+        .risk-MEDIUM { background: #1e3a8a; color: #dbeafe; }
+        .btn-next { background: var(--accent); color: #fff; font-weight: 700; padding: 14px 28px; border: none; border-radius: 6px; cursor: pointer; float: right; font-family: 'JetBrains Mono'; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header-block">
+            <h1>STAGE 02: Advanced Cyber Threat Mapping &amp; Hidden Risk Assessment</h1>
+        </div>
+
+        <div class="guild-box">
+            <h3>🔍 Desk Guide: Spotting the Unseen Vector</h3>
+            <p style="margin-top: 8px; font-size: 0.92rem; color: #cbd5e1; line-height: 1.5;">
+                Listen carefully to their timeline. What they think is just "losing access to WhatsApp" is often a broader **SIM Footprint Hijack**. What they view as a "job opportunity" might be a highly organized multi-stage advance-fee network. Select the primary vector below to dynamically populate the risk evaluation.
+            </p>
+        </div>
+
+        <div class="matrix-grid">
+            <div class="vector-card" id="v1" onclick="evaluateVector('v1', 'SIM Footprint Hijack', 'CRITICAL', 'Target lost signal completely. Threat actor has re-registered the GSM profile at carrier level to capture banking M-Pesa OTP keys.')">
+                <h3>1. SIM Footprint Hijack</h3>
+                <p>Unauthorized GSM re-registration, cellular isolation, zero-signal loops.</p>
+            </div>
+            <div class="vector-card" id="v2" onclick="evaluateVector('v2', 'Advance-Fee Job Scam', 'HIGH', 'Target was lured by fake international or local job offers. Syndicates extract upfront medical, processing, or visa application fees.')">
+                <h3>2. Fake Employment Traps</h3>
+                <p>Overseas deployment fraud, fake registration fees, non-existent HR structures.</p>
+            </div>
+            <div class="vector-card" id="v3" onclick="evaluateVector('v3', 'M-Pesa Social Engineering', 'HIGH', 'Fraudsters use fake carrier masks (e.g., 0722000000 deviations) to trigger accidental reversal stress loops.')">
+                <h3>3. M-Pesa Syndicate Loop</h3>
+                <p>Social engineering cash-outs, fraudulent reversals, lookalike operator dials.</p>
+            </div>
+            <div class="vector-card" id="v4" onclick="evaluateVector('v4', 'Credential Harvesting', 'MEDIUM', 'Deceptive links masquerading as government portals, social networks, or student dashboards.')">
+                <h3>4. Phishing Vector</h3>
+                <p>Credential harvesting forms, cloned web interfaces, malicious shortened links.</p>
+            </div>
+            <div class="vector-card" id="v5" onclick="evaluateVector('v5', 'Digital Coercion & Extortion', 'CRITICAL', 'Threat actor holds exfiltrated assets or private media hostage, demanding cryptocurrency or mobile money transfers.')">
+                <h3>5. Extortion &amp; Blackmail</h3>
+                <p>Exfiltrated private media, targeted tracking, intense psychological blackmail loops.</p>
+            </div>
+            <div class="vector-card" id="v6" onclick="evaluateVector('v6', 'Rental Escrow Fraud', 'MEDIUM', 'Fake online real estate listings requiring cash down-payments before structural viewings.')">
+                <h3>6. Rental Scam Loop</h3>
+                <p>Fabricated online housing profiles demanding urgent holds or viewing tokens.</p>
+            </div>
+        </div>
+
+        <div class="analysis-box">
+            <h3 style="font-family:'JetBrains Mono'; font-size:0.9rem; color:#9ca3af; margin-bottom:12px;">AUTOMATED VECTOR DIAGNOSTICS</h3>
+            <div style="margin-bottom: 12px;">
+                <span id="riskLevelBadge" class="risk-badge risk-MEDIUM">Awaiting Selection</span>
+                <strong id="vectorTitle" style="margin-left: 12px; font-size: 1.1rem;">No Vector Selected</strong>
+            </div>
+            <p id="vectorDesc" style="color: #9ca3af; font-size: 0.9rem; line-height: 1.5;">Click an attack vector block above to run the automated diagnostic calculations...</p>
+            
+            <div style="margin-top: 20px;">
+                <label for="narrative">Detailed Case Notes (Include specific phone numbers, transaction hashes, or URLs):</label>
+                <textarea id="narrative" rows="4" style="width:100%; box-sizing:border-box; margin-top:8px;" placeholder="Type everything here..."></textarea>
+            </div>
+        </div>
+
+        <button class="btn-next" onclick="saveAndNavigate()">Proceed to Containment Engine ➔</button>
+    </div>
+
+    <script>
+        let selectedPath = "";
+        let selectedLevel = "";
+        let selectedDesc = "";
+
+        function evaluateVector(id, name, level, desc) {
+            document.querySelectorAll('.vector-card').forEach(c => c.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            selectedPath = name; selectedLevel = level; selectedDesc = desc;
+
+            const badge = document.getElementById('riskLevelBadge');
+            badge.className = "risk-badge risk-" + level;
+            badge.textContent = level + " RISK IMPACT";
+            
+            document.getElementById('vectorTitle').textContent = name;
+            document.getElementById('vectorDesc').textContent = desc;
+        }
+
+        function saveAndNavigate() {
+            if(!selectedPath) { alert("Please select a threat path vector before proceeding."); return; }
+            sessionStorage.setItem('threatPath', selectedPath);
+            sessionStorage.setItem('riskLevel', selectedLevel);
+            sessionStorage.setItem('vectorExplanation', selectedDesc);
+            sessionStorage.setItem('rawNarrative', document.getElementById('narrative').value);
+            window.location.href = '3_containment.html';
+        }
+    </script>
+</body>
+</html>
