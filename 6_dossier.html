@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desk Page 6: Master Judicial Manifest Dispatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-base: #020617; --bg-surface: #0f172a; --accent: #06b6d4; --border: #334155; --text-light: #f8fafc; }
+        body { background: var(--bg-base); color: var(--text-light); font-family: 'Plus Jakarta Sans', sans-serif; padding: 40px; }
+        .page-container { max-width: 1000px; margin: 0 auto; }
+        .control-panel { background: var(--bg-surface); border: 1px solid var(--border); padding: 24px; border-radius: 8px; margin-bottom: 30px; display: flex; gap: 16px; }
+        .print-area { background: #ffffff; color: #000000; padding: 50px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.5; border: 1px solid #cbd5e1; }
+        .btn { padding: 14px 28px; font-weight: 700; border-radius: 6px; cursor: pointer; font-family: 'JetBrains Mono'; border: none; text-decoration: none; }
+        .btn-print { background: var(--accent); color: #020617; }
+        .btn-reset { background: #334155; color: #fff; }
+        
+        @media print {
+            body { background: #fff !important; padding: 0 !important; color: #000 !important; }
+            .control-panel { display: none !important; }
+            .print-area { border: none !important; box-shadow: none !important; padding: 0 !important; width: 100% !important; display: block !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        
+        <div class="control-panel">
+            <button class="btn btn-print" onclick="window.print()">🖨️ Print Dossier Document Packet</button>
+            <button class="btn btn-reset" onclick="resetDesk()">Clear Session &amp; Return to Intake</button>
+        </div>
+
+        <div class="print-area">
+<pre id="outputTarget">Compiling forensic records from session data modules...</pre>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const anonStatus = sessionStorage.getItem('anonStatus') || 'Omitted';
+            const fullname = sessionStorage.getItem('fullname') || 'Anonymous Record Profile';
+            const affiliation = sessionStorage.getItem('affiliation') || 'Undetermined';
+            const nationalId = sessionStorage.getItem('nationalId') || 'Data Protected / Exempt';
+            const passportNum = sessionStorage.getItem('passportNum') || 'Data Protected / Exempt';
+            const threatPath = sessionStorage.getItem('threatPath') || 'Unclassified Threat Vector';
+            const riskLevel = sessionStorage.getItem('riskLevel') || 'LOW';
+            const vectorExplanation = sessionStorage.getItem('vectorExplanation') || 'No telemetry recorded.';
+            const rawNarrative = sessionStorage.getItem('rawNarrative') || 'No qualitative data added.';
+            const finalTariff = sessionStorage.getItem('finalTariff') || 'KES 0.00';
+            
+            let mitigationsRaw = sessionStorage.getItem('mitigations');
+            let mitigationsArr = mitigationsRaw ? JSON.parse(mitigationsRaw) : [];
+            let mitigationsLog = '';
+            
+            if(mitigationsArr.length === 0) {
+                mitigationsLog = "   [-] WARNING: Zero immediate containment countermeasures executed during this desk session.\n";
+            } else {
+                mitigationsArr.forEach(m => {
+                    mitigationsLog += `   [✓] FORENSIC CONTAINMENT RECORD SECURED: ${m}\n`;
+                });
+            }
+
+            const uniqueCaseId = "CPS-NBI-" + Math.floor(100000 + Math.random() * 900000);
+            const stampEat = new Date().toISOString().replace('T',' ').substring(0,19) + " EAT";
+
+            const reportDossierTemplate = 
+`================================================================================
+ CENTRAL POLICE STATION - NAIROBI // CYBER INVESTIGATION SYSTEMS MANAGEMENT
+================================================================================
+[JUDICIAL EVIDENCE LOG RECORD IDENTIFIER : ${uniqueCaseId}]
+[TIMESTAMP TELEMETRY MATRIX             : ${stampEat}]
+[DESK INVESTIGATOR ATTACHMENT CREDENTIAL : K. Byegon, Cybersecurity Engineering]
+--------------------------------------------------------------------------------
+
+1. DISCLOSED IDENTIFICATION TARGET CONTROL LEDGER
+--------------------------------------------------------------------------------
+   [*] Profile Anonymity Threshold Status : ${anonStatus.toUpperCase()}
+   [*] Target Operational Full Identity    : ${fullname}
+   [*] Legis-Affiliation Affidavits Group : ${affiliation.toUpperCase()}
+   [*] Kenyan National ID Reference Map   : ${nationalId}
+   [*] Foreign International Passport Ref : ${passportNum}
+
+2. SYSTEM ARCHITECTURE ATTACK VECTOR MAPPING
+--------------------------------------------------------------------------------
+   [*] Classified Primary Threat Path    : ${threatPath}
+   [*] Computed Incident Severity Level   : ${riskLevel} RISK MATRIX TARGET
+   [*] Inferred Attack-Surface Footprint  : ${vectorExplanation}
+
+3. PRIMARY QUALITATIVE NARRATIVE RECORDING (VERBATIM STATEMENT)
+--------------------------------------------------------------------------------
+   "${rawNarrative}"
+
+4. ACTIVE THREAT CONTAINMENT LOGS (FORENSIC PRESERVATION TRACK)
+--------------------------------------------------------------------------------
+${mitigationsLog}
+5. MULTI-SECTOR SYSTEMIC REGIONAL PROTECTION BLUEPRINT
+--------------------------------------------------------------------------------
+   [!] Academic Systems: Shared Cloned-Dashboard Protection Guide.
+   [!] Workspace Assets: Shared Business Email Manipulation Protection Metrics.
+   [!] Local Communities: Shared Verification Protocols for Fake Job Ads.
+   [!] Mental Firewall Rule: Zero-Trust Enforcement Verified at Desk.
+
+6. AUDITED FINANCIAL TRANSACTION TARIFF SUMMARY
+--------------------------------------------------------------------------------
+   [*] Aggregated Session Diagnostics Value : ${finalTariff}
+   [*] Financial Status Vector               : Cleared // Fully Settled at Station
+
+--------------------------------------------------------------------------------
+7. ACTIONABLE POST-SESSION LEGAL ADVISORY DIRECTION MATRIX
+--------------------------------------------------------------------------------
+   [1] If your mobile phone suddenly drops network signal completely, immediately
+       treat it as an active SIM hijack and call your provider from an alternate line.
+   [2] Never share transactional verification pins or system access passwords over 
+       the phone, regardless of claims from lookalike carrier support numbers.
+   [3] Keep this hard-copy printed dossier safe. It serves as an official record of 
+       the technical indicators logged during this incident.
+   [4] Save the central cyber unit station helpdesk line for ongoing coordination.
+
+================================================================================
+    STATUS: RECORD COMPLETE // SIGNED &amp; SEALED BY FORENSIC STATION DESK
+================================================================================`;
+
+            document.getElementById('outputTarget').textContent = reportDossierTemplate;
+        };
+
+        function resetDesk() {
+            if(confirm("Confirm: This will completely wipe all session data from local memory. Ensure you have printed the file first. Proceed?")) {
+                sessionStorage.clear();
+                window.location.href = '1_index.html';
+            }
+        }
+    </script>
+</body>
+</html>
